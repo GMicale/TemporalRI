@@ -208,7 +208,11 @@ public class RISolver
 					targetTemporalMap.add(targetProps[0]);
 					int minTime=targetTemporalMap.firstEntry().getElement();
 					int maxTime=targetTemporalMap.lastEntry().getElement();
-					int diffTime=delta-maxTime+minTime;
+					int diffTime;
+					if(delta==Integer.MAX_VALUE)
+						diffTime=Integer.MAX_VALUE;
+					else
+						diffTime=delta-maxTime+minTime;
 					matchedEdges.add(solutionEdges[si]);
 					if(si==0)
 					{
@@ -342,9 +346,19 @@ public class RISolver
 				subMapTimes=mapTimes.subMap(mapQueryToTargetTimes[lowerBound]+1,mapQueryToTargetTimes[upperBound]);
 		}
 		else if(lowerBound==-1)
-			subMapTimes=mapTimes.subMap(minTime-diffTime,mapQueryToTargetTimes[upperBound]);
+		{
+			if(diffTime==Integer.MAX_VALUE)
+				subMapTimes=mapTimes.headMap(mapQueryToTargetTimes[upperBound]);
+			else
+				subMapTimes=mapTimes.subMap(minTime-diffTime,mapQueryToTargetTimes[upperBound]);
+		}
 		else
-			subMapTimes=mapTimes.subMap(mapQueryToTargetTimes[lowerBound]+1,maxTime+diffTime+1);
+		{
+			if(diffTime==Integer.MAX_VALUE)
+				subMapTimes=mapTimes.tailMap(mapQueryToTargetTimes[lowerBound]+1);
+			else
+				subMapTimes=mapTimes.subMap(mapQueryToTargetTimes[lowerBound]+1,maxTime+diffTime+1);
+		}
 		if(source==-1)
 		{
 			if(!subMapTimes.isEmpty())

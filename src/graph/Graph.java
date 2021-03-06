@@ -247,7 +247,11 @@ public class Graph
                     if(!finish[0] || !finish[7])
                     {
                         //Forward-IO flow
-                        Int2ObjectSortedMap<Int2IntOpenHashMap> subMapTimes=mapTimes2Out.subMap(time1+1,time1+delta+1);
+                        Int2ObjectSortedMap<Int2IntOpenHashMap> subMapTimes;
+                        if(delta==Integer.MAX_VALUE)
+                            subMapTimes=mapTimes2Out.tailMap(time1+1);
+                        else
+                            subMapTimes=mapTimes2Out.subMap(time1+1,time1+delta+1);
                         for (Int2ObjectMap.Entry<Int2IntOpenHashMap> e2 : subMapTimes.int2ObjectEntrySet())
                         {
                             Int2IntOpenHashMap mapAdiacs2=e2.getValue();
@@ -288,7 +292,11 @@ public class Graph
                     if(!finish[1] || !finish[8])
                     {
                         //Backward-IO flow
-                        Int2ObjectSortedMap<Int2IntOpenHashMap> subMapTimes=mapTimes2Out.subMap(time1-delta,time1);
+                        Int2ObjectSortedMap<Int2IntOpenHashMap> subMapTimes;
+                        if(delta==Integer.MAX_VALUE)
+                            subMapTimes=mapTimes2Out.headMap(time1);
+                        else
+                            subMapTimes=mapTimes2Out.subMap(time1-delta,time1);
                         for (Int2ObjectMap.Entry<Int2IntOpenHashMap> e2 : subMapTimes.int2ObjectEntrySet())
                         {
                             Int2IntOpenHashMap mapAdiacs2=e2.getValue();
@@ -364,7 +372,11 @@ public class Graph
                     if(!finish[3] || !finish[10])
                     {
                         //Asynchronous-II flow
-                        Int2ObjectSortedMap<Int2IntOpenHashMap> subMapTimes=mapTimes2In.subMap(time1+1,time1+delta+1);
+                        Int2ObjectSortedMap<Int2IntOpenHashMap> subMapTimes;
+                        if(delta==Integer.MAX_VALUE)
+                            subMapTimes=mapTimes2Out.tailMap((time1+1));
+                        else
+                            subMapTimes=mapTimes2Out.subMap(time1+1,time1+delta+1);
                         for (Int2ObjectMap.Entry<Int2IntOpenHashMap> e2 : subMapTimes.int2ObjectEntrySet())
                         {
                             Int2IntOpenHashMap mapAdiacs2=e2.getValue();
@@ -433,7 +445,11 @@ public class Graph
                     if(!finish[5] || !finish[11])
                     {
                         //Asynchronous-OO flow
-                        Int2ObjectSortedMap<Int2IntOpenHashMap> subMapTimes=mapTimes2Out.subMap(time1+1,time1+delta+1);
+                        Int2ObjectSortedMap<Int2IntOpenHashMap> subMapTimes;
+                        if(delta==Integer.MAX_VALUE)
+                            subMapTimes=mapTimes2Out.tailMap((time1+1));
+                        else
+                            subMapTimes=mapTimes2Out.subMap(time1+1,time1+delta+1);
                         for (Int2ObjectMap.Entry<Int2IntOpenHashMap> e2 : subMapTimes.int2ObjectEntrySet())
                         {
                             Int2IntOpenHashMap mapAdiacs2=e2.getValue();
@@ -522,7 +538,11 @@ public class Graph
                     if(!finish[0] || !finish[2])
                     {
                         //Asynchronous flow
-                        Int2ObjectSortedMap<Int2IntOpenHashMap> subMapTimes=mapTimes2.subMap(time1+1,time1+delta+1);
+                        Int2ObjectSortedMap<Int2IntOpenHashMap> subMapTimes;
+                        if(delta==Integer.MAX_VALUE)
+                            subMapTimes=mapTimes2.tailMap((time1+1));
+                        else
+                            subMapTimes=mapTimes2.subMap(time1+1,time1+delta+1);
                         for (Int2ObjectMap.Entry<Int2IntOpenHashMap> e2 : subMapTimes.int2ObjectEntrySet())
                         {
                             Int2IntOpenHashMap mapAdiacs2=e2.getValue();
