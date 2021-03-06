@@ -75,13 +75,13 @@ public class TemporalRI
 
     public static void printHelp()
     {
-        String help = "Usage: java -cp ./out TemporalRI -t <targetFile> -q <queryFile> "+
+        String help = "Usage: java -jar TemporalRI.jar -t <targetFile> -q <queryFile> "+
                 "[-d <deltaThresh> -u -o <dumpOccFile>] \n\n";
         help+="REQUIRED PARAMETERS:\n";
         help+="-t\tTarget network file\n";
         help+="-q\tQuery network file\n\n";
         help+="OPTIONAL PARAMETERS:\n";
-        help+="-d\tDelta threshold for time window of events (by delta is infinite)\n";
+        help+="-d\tDelta threshold for time window of events (by default delta is infinite)\n";
         help+="-u\tTreat target and query as undirected (by default networks are directed)\n";
         help+="-o\tSave query occurrences to specified output file (by default do not save, just count)\n\n";
         System.out.println(help);
