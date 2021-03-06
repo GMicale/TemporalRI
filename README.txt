@@ -1,4 +1,4 @@
-Java implementation of TemporalRI algorith for subgraph matching in temporal networks.
+Java implementation of TemporalRI algorithm for subgraph matching in temporal networks.
 
 References:
 
