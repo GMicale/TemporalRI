@@ -697,79 +697,87 @@ public class Graph
         int[] dests=new int[numFinalEdges];
         while(numSampledEdges<numFinalEdges && indexAttempt<numAttempts)
         {
-            listStartNodes=subgraph.getNodeLabs().keySet().toArray(new int[0]);
-            int sampledNode=listStartNodes[r.nextInt(listStartNodes.length)];
-            int dirType=r.nextInt(2);
-            Int2ObjectAVLTreeMap<Int2IntOpenHashMap> mapTimes;
-            if(dirType==0)
-                mapTimes=outAdjLists.get(sampledNode);
-            else
-                mapTimes=inAdjLists.get(sampledNode);
-            if(mapTimes!=null && !mapTimes.isEmpty())
+            //Get list of candidate incident edges for sampling
+            IntArrayList candSources=new IntArrayList();
+            IntArrayList candDests=new IntArrayList();
+            IntArrayList candEdges=new IntArrayList();
+            for(int start : subgraph.getNodeLabs().keySet())
             {
-                int[] listTimes=mapTimes.keySet().toArray(new int[0]);
-                int sampledTime=listTimes[r.nextInt(listTimes.length)];
-                Int2IntOpenHashMap mapAdiacs=mapTimes.get(sampledTime);
-                int[] listAdiacs=mapAdiacs.keySet().toArray(new int[0]);
-                int sampledAdiac=listAdiacs[r.nextInt(listAdiacs.length)];
-                int edge=mapAdiacs.get(sampledAdiac);
-                if(!setSampledEdges.contains(edge))
+                Int2ObjectAVLTreeMap<Int2IntOpenHashMap> mapTimes=outAdjLists.get(start);
+                if(mapTimes!=null)
                 {
-                    setSampledEdges.add(edge);
-                    subgraph.addNode(sampledAdiac,nodeLabs.get(sampledAdiac));
-                    int[] props=edgeProps.get(edge);
-                    if(dirType==1)
+                    for(int time : mapTimes.keySet())
                     {
-                        subgraph.addEdge(sampledAdiac,sampledNode,props[0],props[1]);
-                        sources[numSampledEdges]=sampledAdiac;
-                        dests[numSampledEdges]=sampledNode;
+                        Int2IntOpenHashMap mapAdiacs=mapTimes.get(time);
+                        for(int adiac : mapAdiacs.keySet())
+                        {
+                            int edgeId=mapAdiacs.get(adiac);
+                            if(!setSampledEdges.contains(edgeId))
+                            {
+                                candSources.add(start);
+                                candDests.add(adiac);
+                                candEdges.add(edgeId);
+                            }
+                        }
                     }
-                    else
-                    {
-                        subgraph.addEdge(sampledNode,sampledAdiac,props[0],props[1]);
-                        sources[numSampledEdges]=sampledNode;
-                        dests[numSampledEdges]=sampledAdiac;
-                    }
-                    numSampledEdges++;
                 }
-                else
-                    indexAttempt++;
+                mapTimes=inAdjLists.get(start);
+                if(mapTimes!=null)
+                {
+                    for(int time : mapTimes.keySet())
+                    {
+                        Int2IntOpenHashMap mapAdiacs=mapTimes.get(time);
+                        for(int adiac : mapAdiacs.keySet())
+                        {
+                            int edgeId=mapAdiacs.get(adiac);
+                            if(!setSampledEdges.contains(edgeId))
+                            {
+                                candSources.add(adiac);
+                                candDests.add(start);
+                                candEdges.add(edgeId);
+                            }
+                        }
+                    }
+                }
+            }
+            if(!candSources.isEmpty())
+            {
+                //Sample randomly one edge from the list of candidate incident edges
+                int sampledPos=r.nextInt(candSources.size());
+                int sampledSource=candSources.getInt(sampledPos);
+                int sampledDest=candDests.getInt(sampledPos);
+                int sampledEdge=candEdges.getInt(sampledPos);
+                //System.out.println(sampledSource+"\t"+sampledDest+"\t"+sampledEdge);
+                //Add nodes if necessary
+                subgraph.addNode(sampledSource,nodeLabs.get(sampledSource));
+                subgraph.addNode(sampledDest,nodeLabs.get(sampledDest));
+                //Add edge to subgraph
+                int[] props=edgeProps.get(sampledEdge);
+                subgraph.addEdge(sampledSource,sampledDest,props[0],props[1]);
+                sources[numSampledEdges]=sampledSource;
+                dests[numSampledEdges]=sampledDest;
+                numSampledEdges++;
+                setSampledEdges.add(sampledEdge);
             }
             else
                 indexAttempt++;
         }
         if(numSampledEdges==numFinalEdges)
         {
-            int[] sampledTimes=new int[numSampledEdges];
-            TreeSet<Integer> setTimes;
-            while(true)
-            {
-                setTimes=new TreeSet<>();
-                int numDistinct=r.nextInt(numSampledEdges)+1;
-                ObjectOpenHashSet<String> setEdges=new ObjectOpenHashSet<>();
-                int i=0;
-                while(i<sampledTimes.length)
-                {
-                    sampledTimes[i]=r.nextInt(numDistinct)+1;
-                    if(!setEdges.contains(sources[i]+"-"+dests[i]+"-"+sampledTimes[i]))
-                    {
-                        setEdges.add(sources[i]+"-"+dests[i]+"-"+sampledTimes[i]);
-                        setTimes.add(sampledTimes[i]);
-                        i++;
-                    }
-                    else
-                        break;
-                }
-                if(i==sampledTimes.length && setTimes.size()==numDistinct)
-                    break;
-            }
+            //Sample timestamps with replacement
+            ObjectOpenHashSet<String> setEdges=new ObjectOpenHashSet<>();
             ObjectArrayList<int[]> subgraphEdgeProps=subgraph.getEdgeProps();
             int i=0;
-            for(int[] props : subgraphEdgeProps)
+            while(i<numSampledEdges)
             {
-                int rank=setTimes.headSet(sampledTimes[i],false).size()+1;
-                props[0]=rank;
-                i++;
+                int sampledTime=r.nextInt(numSampledEdges)+1;
+                if(!setEdges.contains(sources[i]+"-"+dests[i]+"-"+sampledTime))
+                {
+                    setEdges.add(sources[i]+"-"+dests[i]+"-"+sampledTime);
+                    int[] props=subgraphEdgeProps.get(i);
+                    props[0]=sampledTime;
+                    i++;
+                }
             }
             return subgraph;
         }
