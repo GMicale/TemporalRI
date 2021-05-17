@@ -94,3 +94,11 @@ Each row contains an occurrence specified according to the following format:
 </pre>
 
 where N and M are the number of nodes and edges of the occurrence, respectively.
+<br/><br/>
+
+
+<b>Benchmark dataset:</b>
+
+<a href="https://dmiunictit-my.sharepoint.com/:u:/g/personal/gmicale_dmi_unict_it/ETDXZnJqcQhPgsL_2nQafNUBaJI4AU3KGB52g0fGAkMKPg?e=wyp7Xo">Temporal networks</a>: a dataset composed by 7 real temporal networks of different sizes. More details about the networks are reported in:
+
+- Micale G, Locicero G, Pulvirenti A, Ferro A (2021). <i>TemporalRI: subgraph isomorphism in temporal networks with multiple contacts</i>. Submitted to Applied Network Science (2021).
