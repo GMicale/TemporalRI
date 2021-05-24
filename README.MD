@@ -99,6 +99,10 @@ where N and M are the number of nodes and edges of the occurrence, respectively.
 
 <b>Benchmark dataset:</b>
 
-<a href="https://dmiunictit-my.sharepoint.com/:u:/g/personal/gmicale_dmi_unict_it/ETDXZnJqcQhPgsL_2nQafNUBaJI4AU3KGB52g0fGAkMKPg?e=wyp7Xo">Temporal networks</a>: a dataset composed by 7 real temporal networks of different sizes. More details about the networks are reported in:
+<a href="https://dmiunictit-my.sharepoint.com/:u:/g/personal/gmicale_dmi_unict_it/ETDXZnJqcQhPgsL_2nQafNUBaJI4AU3KGB52g0fGAkMKPg?e=wyp7Xo">Temporal networks</a>: a dataset composed by 7 real temporal networks of different sizes. 
+
+<a href="https://dmiunictit-my.sharepoint.com/:u:/g/personal/gmicale_dmi_unict_it/ERma4KO8QEBPqDTVeXbqQNgBi3ZMRW5ExgVs340vUm32Ug?e=Bu7C3C">Temporal queries</a>: a dataset of queries with 3, 6, and 9 edges randomly extracted from the above 7 real temporal networks.
+
+More details about the networks and how the queries were extracted are reported in:
 
 - Micale G, Locicero G, Pulvirenti A, Ferro A (2021). <i>TemporalRI: subgraph isomorphism in temporal networks with multiple contacts</i>. Submitted to Applied Network Science (2021).
