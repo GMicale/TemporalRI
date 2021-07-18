@@ -3,8 +3,8 @@ Java implementation of TemporalRI algorithm for subgraph matching in temporal ne
 
 <b>References:</b>
 
-- Locicero G, Micale G, Pulvirenti A, Ferro A (2021). <i>TemporalRI: A Subgraph Isomorphism Algorithm for Temporal Networks.</i> International Conference on Complex Networks and Their Applications, (Complex Networks 2020), pp. 675-687
-- Micale G, Locicero G, Pulvirenti A, Ferro A (2021). <i>TemporalRI: subgraph isomorphism in temporal networks with multiple contacts</i>. Accepted to Applied Network Science (2021).
+- Locicero G, Micale G, Pulvirenti A, Ferro A (2021). <i>TemporalRI: A Subgraph Isomorphism Algorithm for Temporal Networks.</i> International Conference on Complex Networks and Their Applications, (Complex Networks 2020), pp. 675-687.
+- Micale G, Locicero G, Pulvirenti A, Ferro A (2021). <i>TemporalRI: subgraph isomorphism in temporal networks with multiple contacts</i>. Applied Network Science 6, 55 (2021), doi:10.1007/s41109-021-00397-0.
 <br/><br/>
 
 <b>Requirements:</b>
