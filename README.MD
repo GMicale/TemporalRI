@@ -46,6 +46,7 @@ java -jar TemporalRI.jar -t target.txt -q query.txt -d 10
 <pre>
 java -jar TemporalRI.jar -t target.txt -q query.txt -u -o listOccurrences.txt
 </pre>
+<br/>
 
 <b>Input files format:</b>
 
