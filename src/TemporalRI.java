@@ -2,14 +2,20 @@ import graph.Graph;
 import io.FileManager;
 import matching.RISolver;
 
+//TEMPORALRI MAIN CLASS
 public class TemporalRI
 {
     public static void main(String[] args) throws Exception
     {
+        //Input file for target network
         String targetFile=null;
+        //Input file for query network
         String queryFile=null;
+        //Should the networks be undirected?
         boolean directed=true;
+        //Print occurrences found to standard output?
         boolean dump=false;
+        //Maximum allowed difference between timestamps for the retrieved occurrences
         int delta=Integer.MAX_VALUE;
 
         for (int i=0;i<args.length;i++)
