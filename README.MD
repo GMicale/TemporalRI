@@ -1,4 +1,5 @@
-Java implementation of TemporalRI algorithm for subgraph matching in temporal networks.
+Java implementation of TemporalRI algorithm for subgraph matching in temporal networks. 
+The goal is to find all the occurrences of a query temporal graph Q in a target temporal graph T, such that timestamps of T's edges follow the same order induced by the timestamps of Q's edges and the difference between the maximum and the minimum timestamp of edges of each target occurrence is at most Delta. 
 <br/><br/>
 
 <b>References:</b>
@@ -31,6 +32,20 @@ Optional parameters:
 -o      Save query occurrences to specified output file (by default do not save, just count)
 </pre>
 <br/>
+
+<b>Examples of usage:</b>
+
+1) Find all occurrences of the query in the target with Delta equals to 10
+
+<pre>
+java -jar TemporalRI.jar -t target.txt -q query.txt -d 10
+</pre>
+
+2) Find all occurrences of the query in the target with infinite Delta. Treat the networks as undirected and save query occurrences found to file
+
+<pre>
+java -jar TemporalRI.jar -t target.txt -q query.txt -u -o listOccurrences.txt
+</pre>
 
 <b>Input files format:</b>
 
