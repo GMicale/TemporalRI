@@ -2,12 +2,13 @@ package matching;
 
 import graph.EdgeType;
 
+//Query edge as represented in the state matching machine
 public class MaMaEdge
 {
-	private final int id;
-	private final int source;
-	private final int dest;
-	private final EdgeType type;
+	private final int id; //Edge id
+	private final int source; //Source node of the edge
+	private final int dest; //Destination node of the edge
+	private final EdgeType type; //Edge direction (IN <-, OUT ->, or RECIPROCAL <->)
 	public MaMaEdge(int id, int source, int dest, EdgeType type)
 	{
 		this.id=id;
