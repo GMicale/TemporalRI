@@ -4,6 +4,7 @@ import graph.Graph;
 import io.FileManager;
 import matching.RISolver;
 
+//Test TemporalRI algorithm with pre-defined targets and queries
 public class TestRI
 {
     public static void main(String[] args) throws Exception

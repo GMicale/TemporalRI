@@ -4,14 +4,14 @@ import graph.Graph;
 import io.FileManager;
 
 import java.io.File;
-import java.util.Random;
 
+//Test extraction of temporal subgraphs from target graph
 public class TestExtraction
 {
     public static void main(String[] args) throws Exception
     {
         String[] networks={"SFHH-conf-sensor","tech-as-topology","ia-contacts_dublin","ia-enron-email-dynamic",
-                "digg-friends","ia-yahoo-messages","ia-prosper-loans","ca-cit-HepPh"};
+                "digg-friends","ia-yahoo-messages","ia-prosper-loans"};
         int[] querySizes={3,6,9};
         int numQueries=100;
         FileManager fm=new FileManager();
@@ -32,7 +32,6 @@ public class TestExtraction
                 //System.out.println(target+"\n");
                 System.out.println("Extracting queries of size "+querySizes[j]+" for "+networks[i]+"...");
                 int l=1;
-                Random r=new Random();
                 while(l<=numQueries)
                 {
                     Graph subgraph=target.extractRandomSubgraph(querySizes[j]);
